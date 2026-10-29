@@ -1,0 +1,32 @@
+services:
+  caddy:
+    image: caddy:latest
+    container_name: caddy_internal
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks:
+      proxy:
+        ipv4_address: ${IPVLAN_IP}
+      internal:
+      jelly:
+        ipv4_address: ${JELLYNET_IP}
+      portnet:
+    volumes:
+      - /opt/caddyint:/etc/caddy
+      - caddyint_data:/data
+      - caddyint_config:/config
+
+volumes:
+  caddyint_data:
+  caddyint_config:
+
+networks:
+  proxy:
+    external: true
+  internal:
+    external: true
+  jelly:
+    external: true
+  portnet:
+    external: true

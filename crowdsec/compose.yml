@@ -1,0 +1,34 @@
+services:
+  crowdsec:
+    container_name: crowdsec
+    image: crowdsecurity/crowdsec:v1.7.6
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - COLLECTIONS=crowdsecurity/caddy crowdsecurity/http-cve LePresidente/jellyfin
+      - GID="0"
+      - BOUNCER_KEY_CADDY=${CROWDSEC_API_KEY}
+    volumes:
+      - /opt/crowdsec/acquis.yaml:/etc/crowdsec/acquis.yaml
+      - caddy_caddy-logs:/var/log/caddy/:ro
+      - jellyfin_jellyconfig:/var/log/jellyfin:ro
+      - crowdsec-db:/var/lib/crowdsec/data/
+      - crowdsec-config:/etc/crowdsec/
+    networks:
+      crowdsec:
+        ipv4_address: ${CROWDSECNET_IP}
+    security_opt:
+      - no-new-privileges=true
+
+volumes:
+  crowdsec-db:
+  crowdsec-config:
+  caddy_caddy-logs:
+    external: true
+  jellyfin_jellyconfig:
+    external: true
+
+networks:
+  crowdsec:
+    external: true

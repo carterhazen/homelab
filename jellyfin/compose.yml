@@ -1,0 +1,29 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:12.1
+    container_name: jellyfin
+    env_file:
+      - .env
+    restart: unless-stopped
+    environment:
+      - TZ=America/Denver
+    networks:
+      jelly:
+        ipv4_address: ${JELLYNET_IP}
+    ports:
+      - 8096:8096/tcp
+     # - 7359:7359/udp
+    devices:
+      - /dev/dri:/dev/dri
+    volumes:
+      - jellyconfig:/config
+      - jellycache:/cache
+      - /media/share:/media:ro
+
+volumes:
+  jellyconfig:
+  jellycache:
+
+networks:
+  jelly:
+    external: true

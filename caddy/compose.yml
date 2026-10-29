@@ -1,0 +1,44 @@
+services:
+  caddy:
+    image: serfriz/caddy-cloudflare-crowdsec-geoip-ratelimit-security:latest
+    container_name: caddy
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - CLOUDFLARE_EMAIL=${CF_EMAIL}
+      - CLOUDFLARE_API_TOKEN=${CF_API_TOKEN}
+      - ACME_AGREE=true
+      - CROWDSEC_API_KEY=${CROWDSEC_API_KEY}
+      - CROWDSEC_LAPI_URL=${CROWDSEC_URL}
+    networks:
+      proxy:
+        ipv4_address: ${IPVLAN_IP}
+      internal:
+      jelly:
+        ipv4_address: ${JELLYNET_IP}
+      crowdsec:
+        ipv4_address: ${CROWDSECNET_IP}
+    volumes:
+      - /opt/caddy/caddyfile:/etc/caddy:ro #this is the configuration file location
+      - caddy-logs:/var/log
+      - caddy_data:/data #map the volume for persistent data
+      - caddy_config:/config #map the volume for persistent config data
+    security_opt:
+      - no-new-privileges=true
+
+
+volumes:
+  caddy_data:
+  caddy_config:
+  caddy-logs:
+
+networks:
+  proxy:
+    external: true
+  internal:
+    external: true
+  jelly:
+    external: true
+  crowdsec:
+    external: true

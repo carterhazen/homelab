@@ -1,0 +1,31 @@
+services:
+  mc_atm10:
+    image: itzg/minecraft-server:latest
+    container_name: atm10
+    restart: unless-stopped
+    env_file:
+      - .env
+    pull_policy: daily
+    tty: true
+    stdin_open: true
+    environment:
+      MEMORY: "20G"
+      EULA: "TRUE"
+      TYPE: AUTO_CURSEFORGE
+      CF_API_KEY: ${CF_API_KEY}
+      CF_SLUG: all-the-mods-10
+      ENABLE_WHITELIST: "TRUE"
+      ENFORCE_WHITELIST: "TRUE"
+    volumes:
+      - atm10:/data
+    networks:
+      proxy:
+        ipv4_address: ${IPVLAN_IP}
+
+networks:
+  proxy:
+    external: true
+
+volumes:
+  atm10:
+    external: true
