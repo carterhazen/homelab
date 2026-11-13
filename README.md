@@ -1,16 +1,27 @@
-# homelab
-This is representative of what I'm currently running in my homelab.  It's been a huge learning process and I know I still have a lot to learn.
+# Welcome!
 
-# Physical Architecture
-<img width="1489" height="1268" alt="architecture" src="https://github.com/user-attachments/assets/ba69edc7-d73c-4264-a082-890e7f64a807" />
+Thank you for visiting my Homelab repo!
 
-The physical layout is not perfect.  Ideally every device would have a management interface, but I don't have enough available ports on many of the devices. 
+Here I share what's on my home server, what I'm working on, and I also have a learning section where I try to explain technical concepts.  Documentation allows me to track my progress, distill what I learn, and share with others. 
+<br>
 
-
-# Container & Services Architecture
+# Repo Structure
 
 
-# Security
+## /docker
+
+
+## /kubernetes
+
+
+## /learning
+
+<br>
+
+# The Infrastructure
+
+
+# Infrastructure Security
 
 IT security is always a layered approach.  Here's a couple of the design choices I've made that have an impact on security.
 
