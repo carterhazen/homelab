@@ -26,6 +26,19 @@ Here I go into detail about various IT concepts.  IT can be difficult to learn a
 
 It ain't pretty, but it's cost-effective and runs everything great.
 
+<img src="./readme_images/IMG_8020.jpeg" width="400">
+
+### Starting from the top:
+
+- Firewall / Router
+- Switch
+- Media Server
+- RKE2 Host (Mini PC)
+- NAS
+- Surge protector w/ power monitor
+
+<br>
+
 ## Media Server
 
 This is a custom build for the purpose of running Jellyfin.  An Intel CPU with QuickSync and a dedicated Intel Spark GPU means it can transcode all the main codecs.
@@ -59,4 +72,4 @@ For example, the media server and NAS have bonded 10Gb links.  Because those int
 
 There are lots of discussions online about the best way to deliver self-hosted services to users via the public internet.  Security decisions should always be weighed against the user experience, and this topic is no different.  A VPN is the most secure way to share your services, but for many non-tech-savvy people setting up a VPN is too much to ask.  I choose to expose my services in a way that makes it easy for the user, while also maintaining a healthy level of security.
 
-I only port forward 443.  Cloudflare resolves all requests destined for my domain to my public IP, and internal DNS resolves it to a reverse proxy.  The proxy has several security add-ons for things like geo-blocking, etc. and is tied to CrowdSec which monitors the logs and implements bans on malicious requests.  My sercies offer trusted, auto-renewed certificates via Let's Encrypt and any request that does not match a valid subdomain is met with a 403 Forbidden response.
+I only port forward 443.  Cloudflare resolves all requests destined for my domain to my public IP, and internal DNS resolves it to a reverse proxy.  The proxy has several security add-ons for things like geo-blocking, etc. and is tied to CrowdSec which monitors the logs and implements bans on malicious requests.  My services offer trusted, auto-renewed certificates via Let's Encrypt and any request that does not match a valid subdomain is met with a 403 Forbidden response.
