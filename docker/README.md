@@ -8,7 +8,7 @@ This is where my homelab started, and until I am fully comfortable with Kubernet
 
 Everything runs in a single docker environment via Docker Compose.  Containers are segregated via docker networking as shown below.
 
-![docker networks](../readme_images/dockernetworks.drawio.png)
+![docker networks](../readme_images/dockernetworks.drawio.jpeg)
 
 <br>
 
