@@ -1,0 +1,37 @@
+{
+	servers {
+		trusted_proxies cloudflare
+	}
+
+	crowdsec {
+		api_url http://crowdsec:8080
+		api_key {env.CROWDSEC_API_KEY}
+	}
+}
+
+{env.WILDCARD_DOMAIN} {
+
+	tls {
+		dns cloudflare {env.CF_API_TOKEN}
+    		propagation_delay 2m
+		resolvers 1.1.1.1
+	}
+
+
+	log {
+		output file /var/log/access.log
+	}
+
+
+	@jellyfin host {env.JELLYFIN_FQDN}
+	handle @jellyfin {
+		route {
+			crowdsec
+			reverse_proxy jellyfin:8096
+		}  
+	}
+
+	handle {
+		respond 404
+	} 
+}
